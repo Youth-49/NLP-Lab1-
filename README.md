@@ -51,7 +51,6 @@ D:.
 │  mpseg.py # 最大概率分词模块
 │  pos.py # 词性标注模块
 │  spseg.py # 最短路分词模块
-│  tree.txt # 文件树结构
 │  trie.py # trie树
 │  score.py # 函数
 │
