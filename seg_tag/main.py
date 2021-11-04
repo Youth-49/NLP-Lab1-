@@ -21,22 +21,23 @@ class ToolKit(MPseg, SPseg, WordTagging):
             return self.spcut(sentence)
 
         if (cmd == 'pos'):
-            return self.tagging(self.mpcut(sentence, smooth='Jelinek-Mercer'))
+            return self.tagging(sentence)
 
         print('unknown cmd!')
         return sentence
 
 if __name__ == '__main__':
     tk = ToolKit()
+    # test sentence(demo)
     sentence = '沙曼说，何鲁丽访老是一次重要的高层次访问和交流'
+    label_cut = ['沙曼', '说', '，', '何', '鲁丽', '访', '老', '是', '一', '次', '重要', '的', '高', '层次', '访问', '和', '交流']
+    label_pos = ['nr', 'v', 'w', 'nr', 'nr', 'v', 'j', 'v', 'm', 'q', 'a', 'u', 'a', 'n', 'vn', 'c', 'vn']
+
     pred_mp = tk.process(sentence, cmd='mpseg')
     pred_mp_add1 = tk.process(sentence, cmd='mpseg', smooth='Add1') # Add1 or Jelinek-Mercer smoothing method
     pred_mp_JM = tk.process(sentence, cmd='mpseg', smooth='Jelinek-Mercer')
     pred_sp = tk.process(sentence, cmd='spseg')
-    pred_pos = tk.process(sentence, cmd='pos')
-
-    label_cut = ['沙曼', '说', '，', '何', '鲁丽', '访', '老', '是', '一', '次', '重要', '的', '高', '层次', '访问', '和', '交流']
-    label_pos = ['nr', 'v', 'w', 'nr', 'nr', 'v', 'j', 'v', 'm', 'q', 'a', 'u', 'a', 'n', 'vn', 'c', 'vn']
+    pred_pos = tk.process(label_cut, cmd='pos')
 
     mp_P, mp_R, mp_F = Score(pred=pred_mp, groundTrue=label_cut)
     mp_add1_P, mp_add1_R, mp_add1_F = Score(pred=pred_mp_add1, groundTrue=label_cut)
