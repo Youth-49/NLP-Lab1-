@@ -1,4 +1,6 @@
+## Description
 
+实现了最短路分词，最大概率分词分词，基于HMM的词性标注和基于BiLSTM+CRF的命名实体识别。
 
 ## To Startup
 
